@@ -48,6 +48,8 @@ extensions = [
     'sphinx.ext.autosummary'
 ]
 
+myst_heading_anchors = 3
+
 autodoc_mock_imports = ['json_tricks', 'mmpose.version']
 
 # Ignore >>> when copying code
