@@ -79,7 +79,7 @@ Detailed compatible MMPose and MMCV versions are shown as below. Please choose t
 - **"No module named 'mmcv.ops'"; "No module named 'mmcv.\_ext'"**
 
   1. Uninstall existing mmcv in the environment using `pip uninstall mmcv`.
-  2. Install mmcv following [mmcv installation instruction](https://mmcv.readthedocs.io/en/2.x/get_started/installation.html).
+  2. Install mmcv-full following the [installation instruction](https://mmcv.readthedocs.io/en/latest/#installation).
 
 ## Data
 
@@ -130,10 +130,10 @@ Detailed compatible MMPose and MMCV versions are shown as below. Please choose t
 
   Use smaller log interval. For example, change `interval=50` to `interval=1` in the config:
 
-  ```python
-  # hooks
-  default_hooks = dict(logger=dict(interval=1))
-  ```
+- **How to fix stages of backbone when finetuning a model ?**
+
+  You can refer to [`def _freeze_stages()`](https://github.com/open-mmlab/mmpose/blob/d026725554f9dc08e8708bd9da8678f794a7c9a6/mmpose/models/backbones/resnet.py#L618) and [`frozen_stages`](https://github.com/open-mmlab/mmpose/blob/d026725554f9dc08e8708bd9da8678f794a7c9a6/mmpose/models/backbones/resnet.py#L498),
+  reminding to set `find_unused_parameters = True` in config files for distributed training or testing.
 
 ## Evaluation
 
@@ -154,5 +154,19 @@ Detailed compatible MMPose and MMCV versions are shown as below. Please choose t
 
   A few approaches may help to improve the inference speed:
 
-  1. Set `flip_test=False` in `init_cfg` in the config file.
-  2. For top-down models, use faster human bounding box detector, see [MMDetection](https://mmdetection.readthedocs.io/en/3.x/model_zoo.html).
+  1. set `flip_test=False` in [topdown-res50](https://github.com/open-mmlab/mmpose/tree/e1ec589884235bee875c89102170439a991f8450/configs/top_down/resnet/coco/res50_coco_256x192.py#L51).
+  2. set `post_process='default'` in [topdown-res50](https://github.com/open-mmlab/mmpose/tree/e1ec589884235bee875c89102170439a991f8450/configs/top_down/resnet/coco/res50_coco_256x192.py#L54).
+  3. use faster human bounding box detector, see [MMDetection](https://mmdetection.readthedocs.io/en/latest/model_zoo.html).
+
+  For bottom-up models, try to edit the config file. For example,
+
+  1. set `flip_test=False` in [AE-res50](https://github.com/open-mmlab/mmpose/tree/e1ec589884235bee875c89102170439a991f8450/configs/bottom_up/resnet/coco/res50_coco_512x512.py#L91).
+  2. set `adjust=False` in [AE-res50](https://github.com/open-mmlab/mmpose/tree/e1ec589884235bee875c89102170439a991f8450/configs/bottom_up/resnet/coco/res50_coco_512x512.py#L89).
+  3. set `refine=False` in [AE-res50](https://github.com/open-mmlab/mmpose/tree/e1ec589884235bee875c89102170439a991f8450/configs/bottom_up/resnet/coco/res50_coco_512x512.py#L90).
+  4. use smaller input image size in [AE-res50](https://github.com/open-mmlab/mmpose/tree/e1ec589884235bee875c89102170439a991f8450/configs/bottom_up/resnet/coco/res50_coco_512x512.py#L39).
+
+## Deployment
+
+- **Why is the onnx model converted by mmpose throwing error when converting to other frameworks such as TensorRT?**
+
+  For now, we can only make sure that models in mmpose are onnx-compatible. However, some operations in onnx may be unsupported by your target framework for deployment, e.g. TensorRT in [this issue](https://github.com/open-mmlab/mmaction2/issues/414). When such situation occurs, we suggest you raise an issue and ask the community to help as long as `pytorch2onnx.py` works well and is verified numerically.

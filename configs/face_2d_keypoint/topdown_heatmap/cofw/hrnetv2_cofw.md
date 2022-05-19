@@ -39,4 +39,4 @@ The model is trained on COFW train.
 
 | Arch                                                           | Input Size | NME  |                              ckpt                              |                              log                               |
 | :------------------------------------------------------------- | :--------: | :--: | :------------------------------------------------------------: | :------------------------------------------------------------: |
-| [pose_hrnetv2_w18](/configs/face_2d_keypoint/topdown_heatmap/cofw/td-hm_hrnetv2-w18_8xb64-60e_cofw-256x256.py) |  256x256   | 3.48 | [ckpt](https://download.openmmlab.com/mmpose/face/hrnetv2/hrnetv2_w18_cofw_256x256-49243ab8_20211019.pth) | [log](https://download.openmmlab.com/mmpose/face/hrnetv2/hrnetv2_w18_cofw_256x256_20211019.log.json) |
+| [pose_hrnetv2_w18](/configs/face/2d_kpt_sview_rgb_img/topdown_heatmap/cofw/hrnetv2_w18_cofw_256x256.py) |  256x256   | 3.40 | [ckpt](https://download.openmmlab.com/mmpose/face/hrnetv2/hrnetv2_w18_cofw_256x256-49243ab8_20211019.pth) | [log](https://download.openmmlab.com/mmpose/face/hrnetv2/hrnetv2_w18_cofw_256x256_20211019.log.json) |
