@@ -244,20 +244,14 @@ class Node(Thread, metaclass=ABCMeta):
         }
 
         for buffer_info in self._input_buffers:
-
-            while not buffer_manager.is_empty(buffer_info.buffer_name):
-                msg = buffer_manager.get(buffer_info.buffer_name, block=False)
-                if self.multi_input:
-                    if result[buffer_info.input_name] is None:
-                        result[buffer_info.input_name] = []
-                    result[buffer_info.input_name].append(msg)
-                else:
-                    result[buffer_info.input_name] = msg
-                    break
-
-            # Return unsuccessful flag if any trigger input is unready
-            if buffer_info.trigger and result[buffer_info.input_name] is None:
-                return False, None
+            try:
+                result[buffer_info.input_name] = buffer_manager.get(
+                    buffer_info.buffer_name, block=False)
+            except Empty:
+                if buffer_info.trigger:
+                    # Return unsuccessful flag if any
+                    # trigger input is unready
+                    return False, None
 
         return True, result
 

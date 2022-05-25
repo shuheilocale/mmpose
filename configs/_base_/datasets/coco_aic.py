@@ -290,8 +290,6 @@ dataset_info = dict(
         0.026, 0.025, 0.025, 0.035, 0.035, 0.079, 0.079, 0.072, 0.072, 0.062,
         0.062, 0.107, 0.107, 0.087, 0.087, 0.089, 0.089, 0.026, 0.026
     ])
-<<<<<<< HEAD:configs/_base_/datasets/coco_aic.py
-=======
 ```
 
 ## 创建自定义数据集类
@@ -340,4 +338,3 @@ data = dict(
         ...))
 ...
 ```
->>>>>>> 2130e085 ([Enhance] replace markdownlint with mdformat for avoiding installing ruby (#1382)):docs/zh_cn/tutorials/2_new_dataset.md
