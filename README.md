@@ -35,9 +35,13 @@
 
 </div>
 
-## Introduction
+<div align="center">
 
 English | [简体中文](README_CN.md)
+
+</div>
+
+## Introduction
 
 MMPose is an open-source toolbox for pose estimation based on PyTorch.
 It is a part of the [OpenMMLab project](https://github.com/open-mmlab).
@@ -93,7 +97,8 @@ Please refer to [installation.md](https://mmpose.readthedocs.io/en/latest/instal
 
 ## Getting Started
 
-We provided a series of tutorials about the basic usage of MMPose for new users:
+Please see [get_started.md](docs/en/get_started.md) for the basic usage of MMPose.
+There are also tutorials:
 
 - [learn about configs](docs/en/tutorials/0_config.md)
 - [finetune model](docs/en/tutorials/1_finetune.md)

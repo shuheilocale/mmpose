@@ -9,12 +9,11 @@ You can change the documentation language at the lower-left corner of the page.
    :maxdepth: 1
    :caption: Get Started
 
-   overview.md
-   installation.md
-   guide_to_framework.md
-   demos.md
-   contribution_guide.md
-   faq.md
+   install.md
+   get_started.md
+   demo.md
+   benchmark.md
+   inference_speed_summary.md
 
 .. toctree::
    :maxdepth: 1
