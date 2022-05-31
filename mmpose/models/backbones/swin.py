@@ -12,8 +12,8 @@ from mmengine.model.weight_init import trunc_normal_
 from mmengine.runner import load_state_dict
 from mmengine.utils import to_2tuple
 
-from mmpose.registry import MODELS
-from mmpose.utils import get_root_logger
+from ...utils import get_root_logger
+from ..builder import BACKBONES
 from ..utils.transformer import PatchEmbed, PatchMerging
 from .base_backbone import BaseBackbone
 from .utils import get_state_dict
