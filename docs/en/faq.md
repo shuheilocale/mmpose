@@ -1,3 +1,16 @@
+<!-- TOC -->
+
+- [FAQ](#faq)
+  - [Installation](#installation)
+  - [Coding](#coding)
+  - [Data](#data)
+  - [Training](#training)
+  - [Evaluation](#evaluation)
+  - [Inference](#inference)
+  - [Deployment](#deployment)
+
+<!-- TOC -->
+
 # FAQ
 
 We list some common issues faced by many users and their corresponding solutions here.
@@ -6,33 +19,13 @@ If the contents here do not cover your issue, please create an issue using the [
 
 ## Installation
 
-Compatibility issue between MMCV and MMPose; "AssertionError: MMCV==xxx is used but incompatible. Please install mmcv>=xxx, \<=xxx."
+- Compatibility issue between MMCV and MMPose; "AssertionError: MMCV==xxx is used but incompatible. Please install mmcv>=xxx, \<=xxx."
 
-Here are the version correspondences between `mmdet`, `mmcv` and `mmpose`:
-
-- mmdet 2.x \<=> mmpose 0.x \<=> mmcv 1.x
-- mmdet 3.x \<=> mmpose 1.x \<=> mmcv 2.x
-
-Detailed compatible MMPose and MMCV versions are shown as below. Please choose the correct version of MMCV to avoid installation issues.
-
-### MMPose 1.x
-
-| MMPose version |      MMCV/MMEngine version      |
-| :------------: | :-----------------------------: |
-|     1.0.0      |  mmcv>=2.0.0, mmengine>=0.7.0   |
-|    1.0.0rc1    | mmcv>=2.0.0rc4, mmengine>=0.6.0 |
-|    1.0.0rc0    | mmcv>=2.0.0rc0, mmengine>=0.0.1 |
-|    1.0.0b0     | mmcv>=2.0.0rc0, mmengine>=0.0.1 |
-
-### MMPose 0.x
+  Compatible MMPose and MMCV versions are shown as below. Please choose the correct version of MMCV to avoid installation issues.
 
 | MMPose version |       MMCV version        |
 | :------------: | :-----------------------: |
-|      0.x       | mmcv-full>=1.3.8, \<1.8.0 |
-|     0.29.0     | mmcv-full>=1.3.8, \<1.7.0 |
-|     0.28.1     | mmcv-full>=1.3.8, \<1.7.0 |
-|     0.28.0     | mmcv-full>=1.3.8, \<1.6.0 |
-|     0.27.0     | mmcv-full>=1.3.8, \<1.6.0 |
+|     master     | mmcv-full>=1.3.8, \<1.6.0 |
 |     0.26.0     | mmcv-full>=1.3.8, \<1.6.0 |
 |     0.25.1     | mmcv-full>=1.3.8, \<1.6.0 |
 |     0.25.0     | mmcv-full>=1.3.8, \<1.5.0 |
@@ -81,6 +74,22 @@ Detailed compatible MMPose and MMCV versions are shown as below. Please choose t
   1. Uninstall existing mmcv in the environment using `pip uninstall mmcv`.
   2. Install mmcv-full following the [installation instruction](https://mmcv.readthedocs.io/en/latest/#installation).
 
+## Coding
+
+- Do I need to reinstall mmpose after some code modifications?
+
+  If you follow [the best practice](install.md) and install mmpose from source, any local modifications made to the code will take effect without reinstallation.
+
+- How to develop with multiple `MMPose` versions?
+
+  Generally speaking, we recommend to use different virtual environments to manage `MMPose` in different working directories. However, you can also use the same environment to develop `MMPose` in different folders, like `mmpose-0.26.0`, `mmpose-0.25.0`. When you run the train or test shell script, it will adopt the `mmpose` package in the current folder. And when you run other Python script, you can also add `` PYTHONPATH=`pwd`  `` at the beginning of your command to use the package in the current folder.
+
+  Conversely, to use the default `MMPose` installed in the environment rather than the one you are working with, you can remove the following line in those shell scripts:
+
+  ```shell
+  PYTHONPATH="$(dirname $0)/..":$PYTHONPATH
+  ```
+
 ## Data
 
 - **What if my custom dataset does not have bounding box label?**
@@ -124,7 +133,7 @@ Detailed compatible MMPose and MMCV versions are shown as below. Please choose t
   ]
   ```
 
-  You can refer to [user_guides/visualization.md](../user_guides/visualization.md).
+  You can refer to [customize_runtime.md](/docs/en/tutorials/6_customize_runtime.md#log-config) and the example [config](https://github.com/open-mmlab/mmpose/tree/e1ec589884235bee875c89102170439a991f8450/configs/top_down/resnet/coco/res50_coco_256x192.py#L26).
 
 - **Log info is NOT printed**
 
@@ -138,11 +147,13 @@ Detailed compatible MMPose and MMCV versions are shown as below. Please choose t
 ## Evaluation
 
 - **How to evaluate on MPII test dataset?**
+
   Since we do not have the ground-truth for test dataset, we cannot evaluate it 'locally'.
-  If you would like to evaluate the performance on test set, you have to upload the pred.mat (which is generated during testing) to the official server via email, according to [the MPII guideline](http://human-pose.mpi-inf.mpg.de/#evaluation).
+  If you would like to evaluate the performance on test set, you have to upload the `pred.mat` (which is generated during testing) to the official server via email, according to [the MPII guideline](http://human-pose.mpi-inf.mpg.de/#evaluation).
 
 - **For top-down 2d pose estimation, why predicted joint coordinates can be out of the bounding box (bbox)?**
-  We do not directly use the bbox to crop the image. bbox will be first transformed to center & scale, and the scale will be multiplied by a factor (1.25) to include some context. If the ratio of width/height is different from that of model input (possibly 192/256), we will adjust the bbox.
+
+  We do not directly use the bbox to crop the image. Bbox will be first transformed to center & scale, and the scale will be multiplied by a factor (1.25) to include some context. If the ratio of width/height is different from that of model input (possibly 192/256), we will adjust the bbox. You can refer to [the code](https://github.com/open-mmlab/mmpose/blob/master/mmpose/datasets/pipelines/top_down_transform.py#L15) for more details.
 
 ## Inference
 
@@ -155,7 +166,7 @@ Detailed compatible MMPose and MMCV versions are shown as below. Please choose t
   A few approaches may help to improve the inference speed:
 
   1. set `flip_test=False` in [topdown-res50](https://github.com/open-mmlab/mmpose/tree/e1ec589884235bee875c89102170439a991f8450/configs/top_down/resnet/coco/res50_coco_256x192.py#L51).
-  2. set `post_process='default'` in [topdown-res50](https://github.com/open-mmlab/mmpose/tree/e1ec589884235bee875c89102170439a991f8450/configs/top_down/resnet/coco/res50_coco_256x192.py#L54).
+  2. set `post_process='default'` in [topdown-res50](https://github.com/open-mmlab/mmpose/tree/e1ec589884235bee875c89102170439a991f8450/configs/top_down/resnet/coco/res50_coco_256x192.py#L52).
   3. use faster human bounding box detector, see [MMDetection](https://mmdetection.readthedocs.io/en/latest/model_zoo.html).
 
   For bottom-up models, try to edit the config file. For example,
@@ -169,4 +180,6 @@ Detailed compatible MMPose and MMCV versions are shown as below. Please choose t
 
 - **Why is the onnx model converted by mmpose throwing error when converting to other frameworks such as TensorRT?**
 
-  For now, we can only make sure that models in mmpose are onnx-compatible. However, some operations in onnx may be unsupported by your target framework for deployment, e.g. TensorRT in [this issue](https://github.com/open-mmlab/mmaction2/issues/414). When such situation occurs, we suggest you raise an issue and ask the community to help as long as `pytorch2onnx.py` works well and is verified numerically.
+  For now, we can only make sure that models in mmpose are onnx-compatible. However, some operations in onnx may be unsupported by your target framework for deployment, e.g. TensorRT in [this issue](https://github.com/open-mmlab/mmaction2/issues/414).
+
+  And please note that `pytorch2onnx` in `MMPose` is no longer maintained and will be deprecated in the future. We have [MMDeploy](https://github.com/open-mmlab/mmdeploy) to support model deployment for all `OpenMMLab` codebases including `MMPose`. You can find details about supported models and user guides in their [documentation](https://mmdeploy.readthedocs.io/en/latest/), and raise issues to request support for the models you would like to use.
