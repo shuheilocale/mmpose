@@ -2,9 +2,15 @@
 from dataclasses import dataclass
 from typing import List, Optional, Union
 
+<<<<<<< HEAD
 import numpy as np
 
 from mmpose.apis import inference_topdown, init_model
+=======
+from mmpose.apis import (get_track_id, inference_top_down_pose_model,
+                         init_pose_model)
+from mmpose.core import Smoother
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
 from ...utils import get_config_path
 from ..node import Node
 from ..registry import NODES
@@ -18,7 +24,11 @@ class TrackInfo:
 
 
 @NODES.register_module()
+<<<<<<< HEAD
 class TopdownPoseEstimatorNode(Node):
+=======
+class TopDownPoseEstimatorNode(Node):
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
     """Perform top-down pose estimation using MMPose model.
 
     The node should be placed after an object detection node.
@@ -47,10 +57,22 @@ class TopdownPoseEstimatorNode(Node):
             apply pose estimation. See also ``class_ids``. Default: ``None``
         bbox_thr (float): Set a threshold to filter out objects with low bbox
             scores. Default: 0.5
+<<<<<<< HEAD
 
     Example::
         >>> cfg = dict(
         ...     type='TopdownPoseEstimatorNode',
+=======
+        smooth (bool): If set to ``True``, a :class:`Smoother` will be used to
+            refine the pose estimation result. Default: ``True``
+        smooth_filter_cfg (str): The filter config path to build the smoother.
+            Only valid when ``smooth==True``. By default, OneEuro filter will
+            be used.
+
+    Example::
+        >>> cfg = dict(
+        ...     type='TopDownPoseEstimatorNode',
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
         ...     name='human pose estimator',
         ...     model_config='configs/wholebody/2d_kpt_sview_rgb_img/'
         ...     'topdown_heatmap/coco-wholebody/'
@@ -59,6 +81,10 @@ class TopdownPoseEstimatorNode(Node):
         ...     'top_down/vipnas/vipnas_mbv3_coco_wholebody_256x192_dark'
         ...     '-e2158108_20211205.pth',
         ...     labels=['person'],
+<<<<<<< HEAD
+=======
+        ...     smooth=True,
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
         ...     input_buffer='det_result',
         ...     output_buffer='human_pose')
 
@@ -66,6 +92,7 @@ class TopdownPoseEstimatorNode(Node):
         >>> node = NODES.build(cfg)
     """
 
+<<<<<<< HEAD
     def __init__(self,
                  name: str,
                  model_config: str,
@@ -78,6 +105,23 @@ class TopdownPoseEstimatorNode(Node):
                  class_ids: Optional[List[int]] = None,
                  labels: Optional[List[str]] = None,
                  bbox_thr: float = 0.5):
+=======
+    def __init__(
+            self,
+            name: str,
+            model_config: str,
+            model_checkpoint: str,
+            input_buffer: str,
+            output_buffer: Union[str, List[str]],
+            enable_key: Optional[Union[str, int]] = None,
+            enable: bool = True,
+            device: str = 'cuda:0',
+            class_ids: Optional[List[int]] = None,
+            labels: Optional[List[str]] = None,
+            bbox_thr: float = 0.5,
+            smooth: bool = False,
+            smooth_filter_cfg: str = 'configs/_base_/filters/one_euro.py'):
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
         super().__init__(name=name, enable_key=enable_key, enable=enable)
 
         # Init model
@@ -89,10 +133,25 @@ class TopdownPoseEstimatorNode(Node):
         self.labels = labels
         self.bbox_thr = bbox_thr
 
+<<<<<<< HEAD
         # Init model
         self.model = init_model(
             self.model_config, self.model_checkpoint, device=self.device)
 
+=======
+        if smooth:
+            smooth_filter_cfg = get_config_path(smooth_filter_cfg, 'mmpose')
+            self.smoother = Smoother(smooth_filter_cfg, keypoint_dim=2)
+        else:
+            self.smoother = None
+        # Init model
+        self.model = init_pose_model(
+            self.model_config, self.model_checkpoint, device=self.device)
+
+        # Store history for pose tracking
+        self.track_info = TrackInfo()
+
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
         # Register buffers
         self.register_input_buffer(input_buffer, 'input', trigger=True)
         self.register_output_buffer(output_buffer)
@@ -113,6 +172,7 @@ class TopdownPoseEstimatorNode(Node):
                 lambda x: x.get('label') in self.labels)
         else:
             objects = input_msg.get_objects()
+<<<<<<< HEAD
 
         if len(objects) > 0:
             # Inference pose
@@ -130,6 +190,30 @@ class TopdownPoseEstimatorNode(Node):
                 object['dataset_meta'] = dataset_meta
                 object['pose_model_cfg'] = self.model.cfg
 
+=======
+        # Inference pose
+        objects, _ = inference_top_down_pose_model(
+            self.model, img, objects, bbox_thr=self.bbox_thr, format='xyxy')
+
+        # Pose tracking
+        objects, next_id = get_track_id(
+            objects,
+            self.track_info.last_objects,
+            self.track_info.next_id,
+            use_oks=False,
+            tracking_thr=0.3)
+
+        self.track_info.next_id = next_id
+        # Copy the prediction to avoid track_info being affected by smoothing
+        self.track_info.last_objects = [obj.copy() for obj in objects]
+
+        # Pose smoothing
+        if self.smoother:
+            objects = self.smoother.smooth(objects)
+
+        for obj in objects:
+            obj['pose_model_cfg'] = self.model.cfg
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
         input_msg.update_objects(objects)
 
         return input_msg

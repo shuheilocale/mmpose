@@ -54,8 +54,11 @@ class Node(Thread, metaclass=ABCMeta):
             checking if input is ready. Default: 0.001
         enable (bool): Default enable/disable status. Default: ``True``
         daemon (bool): Whether node is a daemon. Default: ``True``
+<<<<<<< HEAD
         multi_input (bool): Whether load all messages in buffer. If False,
             only one message will be loaded each time. Default: ``False``
+=======
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
     """
 
     def __init__(self,
@@ -398,6 +401,7 @@ class Node(Thread, metaclass=ABCMeta):
             if output_msg is not None:
                 self._send_output_to_buffers(output_msg)
 
+<<<<<<< HEAD
 <<<<<<< HEAD:mmpose/apis/webcam/nodes/node.py
         self.logger.info('Process ends.')
 =======
@@ -451,3 +455,6 @@ class MultiInputNode(Node):
 
         return True, result
 >>>>>>> d3c17d5e ([Feature] Gesture recognition algorithm MTUT on NVGesture dataset (#1380)):tools/webcam/webcam_apis/nodes/node.py
+=======
+        logging.info(f'Node "{self.name}": process ending.')
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))

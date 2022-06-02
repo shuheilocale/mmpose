@@ -1,4 +1,8 @@
 # Copyright (c) OpenMMLab. All rights reserved.
+<<<<<<< HEAD
+=======
+import logging
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
 from queue import Full, Queue
 from threading import Thread
 from typing import List, Union
@@ -79,9 +83,16 @@ class RecorderNode(Node):
             try:
                 self.queue.put(img, timeout=1)
                 img_queued = True
+<<<<<<< HEAD
                 self.logger.info('Recorder received one frame.')
             except Full:
                 self.logger.warn('Recorder jamed!')
+=======
+                logging.info(
+                    f'Node "{self.name}": recorder received one frame!')
+            except Full:
+                logging.info(f'Node "{self.name}": recorder jamed!')
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
 
         return input_msg
 
@@ -106,7 +117,11 @@ class RecorderNode(Node):
 
             self.vwriter.write(img)
 
+<<<<<<< HEAD
         self.logger.info('Recorder released.')
+=======
+        logging.info('Video recorder released!')
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
         if self.vwriter is not None:
             self.vwriter.release()
 
@@ -121,6 +136,10 @@ class RecorderNode(Node):
 
         if self.t_record.is_alive():
             # Force to release self.vwriter
+<<<<<<< HEAD
             self.logger.warn('Recorder forced release!')
+=======
+            logging.info('Video recorder forced release!')
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
             if self.vwriter is not None:
                 self.vwriter.release()

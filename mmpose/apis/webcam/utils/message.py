@@ -52,7 +52,11 @@ class Message():
         if node is not None:
             if node_name is not None or node_type is not None:
                 warnings.warn(
+<<<<<<< HEAD
                     '`node_name` and `node_type` will be overridden if node '
+=======
+                    '`node_name` and `node_type` will be overridden if node'
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
                     'is provided.')
             node_name = node.name
             node_type = node.__class__.__name__

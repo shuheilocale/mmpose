@@ -5,6 +5,11 @@
     width: 120px;
 }
 
+<<<<<<< HEAD
 table.autosummary td {
     width: 35%
+=======
+table.colwidths-auto td {
+    width: 50%
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
 }

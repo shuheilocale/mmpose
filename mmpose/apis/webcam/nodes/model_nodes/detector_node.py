@@ -1,9 +1,15 @@
 # Copyright (c) OpenMMLab. All rights reserved.
+<<<<<<< HEAD
 from typing import Dict, List, Optional, Union
 
 import numpy as np
 
 from mmpose.utils import adapt_mmdet_pipeline
+=======
+from itertools import zip_longest
+from typing import Dict, List, Optional, Union
+
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
 from ...utils import get_config_path
 from ..node import Node
 from ..registry import NODES
@@ -41,9 +47,12 @@ class DetectorNode(Node):
             the model. Default: ``'cuda:0'``
         bbox_thr (float): Set a threshold to filter out objects with low bbox
             scores. Default: 0.5
+<<<<<<< HEAD
         multi_input (bool): Whether load all frames in input buffer. If True,
             all frames in buffer will be loaded and stacked. The latest frame
             is used to detect objects of interest. Default: False
+=======
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
 
     Example::
         >>> cfg = dict(
@@ -72,17 +81,25 @@ class DetectorNode(Node):
                  enable_key: Optional[Union[str, int]] = None,
                  enable: bool = True,
                  device: str = 'cuda:0',
+<<<<<<< HEAD
                  bbox_thr: float = 0.5,
                  multi_input: bool = False):
+=======
+                 bbox_thr: float = 0.5):
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
         # Check mmdetection is installed
         assert has_mmdet, \
             f'MMDetection is required for {self.__class__.__name__}.'
 
+<<<<<<< HEAD
         super().__init__(
             name=name,
             enable_key=enable_key,
             enable=enable,
             multi_input=multi_input)
+=======
+        super().__init__(name=name, enable_key=enable_key, enable=enable)
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
 
         self.model_config = get_config_path(model_config, 'mmdet')
         self.model_checkpoint = model_checkpoint
@@ -92,7 +109,10 @@ class DetectorNode(Node):
         # Init model
         self.model = init_detector(
             self.model_config, self.model_checkpoint, device=self.device)
+<<<<<<< HEAD
         self.model.cfg = adapt_mmdet_pipeline(self.model.cfg)
+=======
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
 
         # Register buffers
         self.register_input_buffer(input_buffer, 'input', trigger=True)
@@ -104,23 +124,30 @@ class DetectorNode(Node):
     def process(self, input_msgs):
         input_msg = input_msgs['input']
 
+<<<<<<< HEAD
         if self.multi_input:
             imgs = [frame.get_image() for frame in input_msg]
             input_msg = input_msg[-1]
 
+=======
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
         img = input_msg.get_image()
 
         preds = inference_detector(self.model, img)
         objects = self._post_process(preds)
         input_msg.update_objects(objects)
 
+<<<<<<< HEAD
         if self.multi_input:
             input_msg.set_image(np.stack(imgs, axis=0))
 
+=======
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
         return input_msg
 
     def _post_process(self, preds) -> List[Dict]:
         """Post-process the predictions of MMDetection model."""
+<<<<<<< HEAD
         instances = preds.pred_instances.cpu().numpy()
 
         classes = self.model.dataset_meta['classes']
@@ -140,4 +167,36 @@ class DetectorNode(Node):
                 'dataset_meta': self.model.dataset_meta.copy(),
             }
             objects.append(obj)
+=======
+        if isinstance(preds, tuple):
+            dets = preds[0]
+            segms = preds[1]
+        else:
+            dets = preds
+            segms = [[]] * len(dets)
+
+        classes = self.model.CLASSES
+        if isinstance(classes, str):
+            classes = (classes, )
+
+        assert len(dets) == len(classes)
+        assert len(segms) == len(classes)
+
+        objects = []
+
+        for i, (label, bboxes, masks) in enumerate(zip(classes, dets, segms)):
+
+            for bbox, mask in zip_longest(bboxes, masks):
+                if bbox[4] < self.bbox_thr:
+                    continue
+                obj = {
+                    'class_id': i,
+                    'label': label,
+                    'bbox': bbox,
+                    'mask': mask,
+                    'det_model_cfg': self.model.cfg
+                }
+                objects.append(obj)
+
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
         return objects

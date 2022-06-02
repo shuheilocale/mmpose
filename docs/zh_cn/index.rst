@@ -46,8 +46,37 @@ You can change the documentation language at the lower-left corner of the page.
    notes/pytorch_2.md
 
 .. toctree::
+<<<<<<< HEAD
    :maxdepth: 1
    :caption: API 参考文档
+=======
+   :maxdepth: 2
+   :caption: 教程
+
+   tutorials/0_config.md
+   tutorials/1_finetune.md
+   tutorials/2_new_dataset.md
+   tutorials/3_data_pipeline.md
+   tutorials/4_new_modules.md
+   tutorials/5_export_model.md
+   tutorials/6_customize_runtime.md
+   tutorials/7_webcam_api.md
+
+.. toctree::
+   :maxdepth: 2
+   :caption: 常用工具
+
+   useful_tools.md
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Notes
+
+   faq.md
+
+.. toctree::
+   :caption: API文档
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
 
    api.rst
 

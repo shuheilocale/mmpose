@@ -1,9 +1,17 @@
 # Copyright (c) OpenMMLab. All rights reserved.
+<<<<<<< HEAD
+=======
+from __future__ import annotations
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
 from functools import wraps
 from queue import Queue
 from typing import Any, Dict, List, Optional
 
+<<<<<<< HEAD
 from mmengine import is_seq_of
+=======
+from mmcv import is_seq_of
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
 
 __all__ = ['BufferManager']
 
@@ -173,7 +181,11 @@ class BufferManager():
         """
         return self._buffers[name].full()
 
+<<<<<<< HEAD
     def get_sub_manager(self, buffer_names: List[str]) -> 'BufferManager':
+=======
+    def get_sub_manager(self, buffer_names: List[str]) -> BufferManager:
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
         """Return a :class:`BufferManager` instance that covers a subset of the
         buffers in the parent. The is usually used to partially share the
         buffers of the executor to the node.
@@ -197,7 +209,11 @@ class BufferManager():
         buffer_info = {}
         for name, buffer in self._buffers.items():
             buffer_info[name] = {
+<<<<<<< HEAD
                 'size': buffer.qsize(),
+=======
+                'size': buffer.size,
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
                 'maxsize': buffer.maxsize
             }
         return buffer_info

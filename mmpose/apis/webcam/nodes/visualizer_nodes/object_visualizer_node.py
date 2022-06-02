@@ -1,4 +1,5 @@
 # Copyright (c) OpenMMLab. All rights reserved.
+<<<<<<< HEAD
 import math
 from itertools import groupby
 from typing import Dict, List, Optional, Tuple, Union
@@ -7,11 +8,22 @@ import cv2
 import mmcv
 import numpy as np
 
+=======
+from itertools import groupby
+from typing import Dict, List, Optional, Tuple, Union
+
+import numpy as np
+from mmcv import color_val
+
+from mmpose.core import imshow_bboxes, imshow_keypoints
+from mmpose.datasets import DatasetInfo
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
 from ...utils import FrameMessage
 from ..base_visualizer_node import BaseVisualizerNode
 from ..registry import NODES
 
 
+<<<<<<< HEAD
 def imshow_bboxes(img,
                   bboxes,
                   labels=None,
@@ -185,6 +197,8 @@ def imshow_keypoints(img,
     return img
 
 
+=======
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
 @NODES.register_module()
 class ObjectVisualizerNode(BaseVisualizerNode):
     """Visualize the bounding box and keypoints of objects.
@@ -250,7 +264,11 @@ class ObjectVisualizerNode(BaseVisualizerNode):
                  kpt_thr: float = 0.3,
                  radius: int = 4,
                  thickness: int = 2,
+<<<<<<< HEAD
                  bbox_color: Optional[Union[str, Tuple, Dict]] = 'green'):
+=======
+                 bbox_color: Optional[Union[str, Tuple, Dict]] = None):
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
 
         super().__init__(
             name=name,
@@ -260,12 +278,27 @@ class ObjectVisualizerNode(BaseVisualizerNode):
             enable=enable)
 
         self.kpt_thr = kpt_thr
+<<<<<<< HEAD
         self.bbox_color = bbox_color
         self.show_bbox = show_bbox
         self.show_keypoint = show_keypoint
         self.must_have_keypoint = must_have_keypoint
         self.radius = radius
         self.thickness = thickness
+=======
+        self.radius = radius
+        self.thickness = thickness
+        self.show_bbox = show_bbox
+        self.show_keypoint = show_keypoint
+        self.must_have_keypoint = must_have_keypoint
+
+        if bbox_color is None:
+            self.bbox_color = self.default_bbox_color
+        elif isinstance(bbox_color, dict):
+            self.bbox_color = {k: color_val(v) for k, v in bbox_color.items()}
+        else:
+            self.bbox_color = color_val(bbox_color)
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
 
     def _draw_bbox(self, canvas: np.ndarray, input_msg: FrameMessage):
         """Draw object bboxes."""
@@ -297,7 +330,12 @@ class ObjectVisualizerNode(BaseVisualizerNode):
             labels=labels,
             colors=colors,
             text_color='white',
+<<<<<<< HEAD
             font_scale=0.5)
+=======
+            font_scale=0.5,
+            show=False)
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
 
         return canvas
 
@@ -311,6 +349,7 @@ class ObjectVisualizerNode(BaseVisualizerNode):
 
         for model_cfg, group in groupby(objects,
                                         lambda x: x['pose_model_cfg']):
+<<<<<<< HEAD
             dataset_info = objects[0]['dataset_meta']
             keypoints = [
                 np.concatenate(
@@ -324,6 +363,17 @@ class ObjectVisualizerNode(BaseVisualizerNode):
                 kpt_score_thr=self.kpt_thr,
                 pose_kpt_color=dataset_info['keypoint_colors'],
                 pose_link_color=dataset_info['skeleton_link_colors'],
+=======
+            dataset_info = DatasetInfo(model_cfg.dataset_info)
+            keypoints = [obj['keypoints'] for obj in group]
+            imshow_keypoints(
+                canvas,
+                keypoints,
+                skeleton=dataset_info.skeleton,
+                kpt_score_thr=0.3,
+                pose_kpt_color=dataset_info.pose_kpt_color,
+                pose_link_color=dataset_info.pose_link_color,
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
                 radius=self.radius,
                 thickness=self.thickness)
 

@@ -1,12 +1,18 @@
 # Copyright (c) OpenMMLab. All rights reserved.
+<<<<<<< HEAD
 import logging
+=======
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
 from collections import defaultdict
 from contextlib import contextmanager
 from threading import Event
 from typing import Optional
 
+<<<<<<< HEAD
 logger = logging.getLogger('Event')
 
+=======
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
 
 class EventManager():
     """A helper class to manage events.
@@ -46,7 +52,10 @@ class EventManager():
         if is_keyboard:
             event_name = self._get_keyboard_event_name(event_name)
         self._events[event_name].set()
+<<<<<<< HEAD
         logger.info(f'Event {event_name} is set.')
+=======
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
 
     def wait(self,
              event_name: str = None,
@@ -97,7 +106,10 @@ class EventManager():
         if is_keyboard:
             event_name = self._get_keyboard_event_name(event_name)
         self._events[event_name].clear()
+<<<<<<< HEAD
         logger.info(f'Event {event_name} is cleared.')
+=======
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
 
     @staticmethod
     def _get_keyboard_event_name(key):

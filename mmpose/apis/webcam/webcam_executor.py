@@ -30,7 +30,10 @@ DEFAULT_USER_BUFFER_SIZE = 1
 
 logger = logging.getLogger('Executor')
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
 class WebcamExecutor():
     """The interface to build and execute webcam applications from configs.
 
@@ -155,7 +158,11 @@ class WebcamExecutor():
         # This step is performed after node building when the executor has
         # create full buffer/event managers and can
         for node in self.node_list:
+<<<<<<< HEAD
             logger.info(f'Set executor for node: {node.name})')
+=======
+            logging.info(f'Set executor for node: {node.name})')
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
             node.set_executor(self)
 
     def _read_camera(self):
@@ -317,7 +324,11 @@ class WebcamExecutor():
             logger.info('Display has stopped.')
 
             # joint non-daemon nodes and executor threads
+<<<<<<< HEAD
             logger.info('Camera reading is about to join.')
+=======
+            logging.info('Camera reading about to join')
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
             t_read.join()
 
             for node in non_daemon_nodes:

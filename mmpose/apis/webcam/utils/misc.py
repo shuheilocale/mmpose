@@ -81,8 +81,21 @@ def load_image_from_disk_or_url(filename: str,
         return image
 
 
+<<<<<<< HEAD
 def get_cached_file_path(url: str,
                          save_dir: str,
+=======
+def mkdir_or_exist(dir_name: str, mode: int = 0o777):
+    """Create a directory if it doesn't exist."""
+    if dir_name == '':
+        return
+    dir_name = osp.expanduser(dir_name)
+    os.makedirs(dir_name, mode=mode, exist_ok=True)
+
+
+def get_cached_file_path(url: str,
+                         save_dir: Optional[str] = None,
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
                          progress: bool = True,
                          check_hash: bool = False,
                          file_name: Optional[str] = None) -> str:
@@ -97,7 +110,11 @@ def get_cached_file_path(url: str,
 
     Args:
         url (str): URL of the object to download
+<<<<<<< HEAD
         save_dir (str): directory in which to save the object
+=======
+        save_dir (str, optional): directory in which to save the object
+>>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
         progress (bool): whether or not to display a progress bar
             to stderr. Default: ``True``
         check_hash(bool): If True, the filename part of the URL
