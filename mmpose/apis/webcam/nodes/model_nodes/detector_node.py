@@ -9,7 +9,12 @@ from mmpose.utils import adapt_mmdet_pipeline
 from itertools import zip_longest
 from typing import Dict, List, Optional, Union
 
+<<<<<<< HEAD
 >>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
+=======
+import numpy as np
+
+>>>>>>> 9ee54f79 ([Feature] Add hand gesture recognition webcam demo (#1410))
 from ...utils import get_config_path
 from ..node import Node
 from ..registry import NODES
@@ -48,11 +53,17 @@ class DetectorNode(Node):
         bbox_thr (float): Set a threshold to filter out objects with low bbox
             scores. Default: 0.5
 <<<<<<< HEAD
+<<<<<<< HEAD
         multi_input (bool): Whether load all frames in input buffer. If True,
             all frames in buffer will be loaded and stacked. The latest frame
             is used to detect objects of interest. Default: False
 =======
 >>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
+=======
+        multi_input (bool): Whether load all frames in input buffer. If True,
+            all frames in buffer will be loaded and stacked. The latest frame
+            is used to detect objects of interest. Default: False
+>>>>>>> 9ee54f79 ([Feature] Add hand gesture recognition webcam demo (#1410))
 
     Example::
         >>> cfg = dict(
@@ -82,24 +93,35 @@ class DetectorNode(Node):
                  enable: bool = True,
                  device: str = 'cuda:0',
 <<<<<<< HEAD
+<<<<<<< HEAD
                  bbox_thr: float = 0.5,
                  multi_input: bool = False):
 =======
                  bbox_thr: float = 0.5):
 >>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
+=======
+                 bbox_thr: float = 0.5,
+                 multi_input: bool = False):
+>>>>>>> 9ee54f79 ([Feature] Add hand gesture recognition webcam demo (#1410))
         # Check mmdetection is installed
         assert has_mmdet, \
             f'MMDetection is required for {self.__class__.__name__}.'
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9ee54f79 ([Feature] Add hand gesture recognition webcam demo (#1410))
         super().__init__(
             name=name,
             enable_key=enable_key,
             enable=enable,
             multi_input=multi_input)
+<<<<<<< HEAD
 =======
         super().__init__(name=name, enable_key=enable_key, enable=enable)
 >>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
+=======
+>>>>>>> 9ee54f79 ([Feature] Add hand gesture recognition webcam demo (#1410))
 
         self.model_config = get_config_path(model_config, 'mmdet')
         self.model_checkpoint = model_checkpoint
@@ -125,12 +147,18 @@ class DetectorNode(Node):
         input_msg = input_msgs['input']
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9ee54f79 ([Feature] Add hand gesture recognition webcam demo (#1410))
         if self.multi_input:
             imgs = [frame.get_image() for frame in input_msg]
             input_msg = input_msg[-1]
 
+<<<<<<< HEAD
 =======
 >>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
+=======
+>>>>>>> 9ee54f79 ([Feature] Add hand gesture recognition webcam demo (#1410))
         img = input_msg.get_image()
 
         preds = inference_detector(self.model, img)
@@ -138,11 +166,17 @@ class DetectorNode(Node):
         input_msg.update_objects(objects)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         if self.multi_input:
             input_msg.set_image(np.stack(imgs, axis=0))
 
 =======
 >>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
+=======
+        if self.multi_input:
+            input_msg.set_image(np.stack(imgs, axis=0))
+
+>>>>>>> 9ee54f79 ([Feature] Add hand gesture recognition webcam demo (#1410))
         return input_msg
 
     def _post_process(self, preds) -> List[Dict]:

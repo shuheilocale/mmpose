@@ -55,10 +55,15 @@ class Node(Thread, metaclass=ABCMeta):
         enable (bool): Default enable/disable status. Default: ``True``
         daemon (bool): Whether node is a daemon. Default: ``True``
 <<<<<<< HEAD
+<<<<<<< HEAD
         multi_input (bool): Whether load all messages in buffer. If False,
             only one message will be loaded each time. Default: ``False``
 =======
 >>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
+=======
+        multi_input (bool): Whether load all messages in buffer. If False,
+            only one message will be loaded each time. Default: ``False``
+>>>>>>> 9ee54f79 ([Feature] Add hand gesture recognition webcam demo (#1410))
     """
 
     def __init__(self,
@@ -247,14 +252,20 @@ class Node(Thread, metaclass=ABCMeta):
         }
 
         for buffer_info in self._input_buffers:
-            try:
-                result[buffer_info.input_name] = buffer_manager.get(
-                    buffer_info.buffer_name, block=False)
-            except Empty:
-                if buffer_info.trigger:
-                    # Return unsuccessful flag if any
-                    # trigger input is unready
-                    return False, None
+
+            while not buffer_manager.is_empty(buffer_info.buffer_name):
+                msg = buffer_manager.get(buffer_info.buffer_name, block=False)
+                if self.multi_input:
+                    if result[buffer_info.input_name] is None:
+                        result[buffer_info.input_name] = []
+                    result[buffer_info.input_name].append(msg)
+                else:
+                    result[buffer_info.input_name] = msg
+                    break
+
+            # Return unsuccessful flag if any trigger input is unready
+            if buffer_info.trigger and result[buffer_info.input_name] is None:
+                return False, None
 
         return True, result
 
