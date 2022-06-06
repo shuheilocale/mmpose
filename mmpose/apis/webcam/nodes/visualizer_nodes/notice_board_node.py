@@ -54,10 +54,14 @@ class NoticeBoardNode(BaseVisualizerNode):
         ...         'effects. Have fun!', '', 'Hot-keys:',
         ...         '"v": Pose estimation result visualization',
 <<<<<<< HEAD
+<<<<<<< HEAD
         ...         '"s": Sunglasses effect B-)', '"b": Big-eye effect 0_0',
 =======
         ...         '"s": Sunglasses effect B-)', '"b": Bug-eye effect 0_0',
 >>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
+=======
+        ...         '"s": Sunglasses effect B-)', '"b": Big-eye effect 0_0',
+>>>>>>> 459fbb77 ([Doc] Add English tutorial for Webcam API (#1413))
         ...         '"h": Show help information',
         ...         '"m": Show diagnostic information', '"q": Exit'
         ...     ],

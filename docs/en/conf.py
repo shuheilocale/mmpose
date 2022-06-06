@@ -54,7 +54,7 @@ extensions = [
 >>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
 ]
 
-myst_heading_anchors = 3
+myst_heading_anchors = 4
 
 autodoc_mock_imports = ['json_tricks', 'mmpose.version']
 
