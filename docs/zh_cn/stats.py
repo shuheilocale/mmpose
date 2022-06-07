@@ -21,7 +21,7 @@ files = sorted(glob.glob('model_zoo/*.md'))
 stats = []
 
 for f in files:
-    with open(f, 'r') as content_file:
+    with open(f, 'r', encoding='utf-8') as content_file:
         content = content_file.read()
 
     # title
@@ -94,7 +94,11 @@ modelzoo = f"""
 
 """
 
+<<<<<<< HEAD
 with open('model_zoo.md', 'w') as f:
+=======
+with open('modelzoo.md', 'w', encoding='utf-8') as f:
+>>>>>>> fef003a6 ([Fix] fix hand readthedocs page (#1416))
     f.write(modelzoo)
 
 # Count datasets
@@ -105,7 +109,7 @@ files = sorted(glob.glob('model_zoo/*.md'))
 datastats = []
 
 for f in files:
-    with open(f, 'r') as content_file:
+    with open(f, 'r', encoding='utf-8') as content_file:
         content = content_file.read()
 
     # title
@@ -172,5 +176,10 @@ dataset_zoo = f"""
 {datamsglist}
 """
 
+<<<<<<< HEAD
 with open('dataset_zoo.md', 'w') as f:
     f.write(dataset_zoo)
+=======
+with open('datasets.md', 'w', encoding='utf-8') as f:
+    f.write(modelzoo)
+>>>>>>> fef003a6 ([Fix] fix hand readthedocs page (#1416))

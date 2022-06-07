@@ -48,12 +48,29 @@ You can change the documentation language at the lower-left corner of the page.
    :maxdepth: 2
    :caption: Model Zoo
 
+<<<<<<< HEAD
    model_zoo.txt
    model_zoo/body_2d_keypoint.md
    model_zoo/face_2d_keypoint.md
    model_zoo/hand_2d_keypoint.md
    model_zoo/wholebody_2d_keypoint.md
    model_zoo/animal_2d_keypoint.md
+=======
+   modelzoo.md
+   topics/animal.md
+   topics/body(2d,kpt,sview,img).md
+   topics/body(2d,kpt,sview,vid).md
+   topics/body(3d,kpt,sview,img).md
+   topics/body(3d,kpt,sview,vid).md
+   topics/body(3d,kpt,mview,img).md
+   topics/body(3d,mesh,sview,img).md
+   topics/face.md
+   topics/fashion.md
+   topics/hand(2d,kpt,rgb,img).md
+   topics/hand(3d,kpt,rgb,img).md
+   topics/hand(gesture,rgbd,vid).md
+   topics/wholebody.md
+>>>>>>> fef003a6 ([Fix] fix hand readthedocs page (#1416))
 
 .. toctree::
    :maxdepth: 2
