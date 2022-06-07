@@ -68,6 +68,7 @@ You can change the documentation language at the lower-left corner of the page.
    :maxdepth: 2
    :caption: Dataset Zoo
 
+<<<<<<< HEAD
    dataset_zoo.md
    dataset_zoo/2d_body_keypoint.md
    dataset_zoo/2d_wholebody_keypoint.md
@@ -78,6 +79,16 @@ You can change the documentation language at the lower-left corner of the page.
    dataset_zoo/3d_body_keypoint.md
    dataset_zoo/3d_hand_keypoint.md
    dataset_zoo/dataset_tools.md
+=======
+   tutorials/0_config.md
+   tutorials/1_finetune.md
+   tutorials/2_new_dataset.md
+   tutorials/3_data_pipeline.md
+   tutorials/4_new_modules.md
+   tutorials/5_export_model.md
+   tutorials/6_customize_runtime.md
+   tutorials/7_webcam_api.md
+>>>>>>> 94f1dbcb (Bump version v0.27.0 (#1414))
 
 .. toctree::
    :maxdepth: 1

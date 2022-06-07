@@ -1,5 +1,6 @@
 # Changelog
 
+<<<<<<< HEAD:docs/zh_cn/notes/changelog.md
 ## **v1.0.0beta (1/09/2022)**
 
 We are excited to announce the release of MMPose 1.0.0beta.
@@ -65,10 +66,14 @@ This release is meant to fix the compatibility with the latest mmcv v1.6.1
 - Fix smoother configs in video 3D demo ([#1457](https://github.com/open-mmlab/mmpose/pull/1457)) @ly015
 
 ## **v0.27.0 (07/06/2022)**
+=======
+## v0.27.0 (07/06/2022)
+>>>>>>> 94f1dbcb (Bump version v0.27.0 (#1414)):docs/en/changelog.md
 
 **Highlights**
 
 - Support hand gesture recognition
+<<<<<<< HEAD:docs/zh_cn/notes/changelog.md
 
   - Try the demo for gesture recognition
   - Learn more about the algorithm, dataset and experiment results
@@ -78,6 +83,14 @@ This release is meant to fix the compatibility with the latest mmcv v1.6.1
   - Tutorials (EN|zh_CN)
   - [API Reference](https://mmpose.readthedocs.io/en/latest/api.html#mmpose-apis-webcam)
   - Demo
+=======
+  - Try the [demo](/demo/docs/gesture_recognition_demo.md) for gesture recognition
+  - Learn more about the [algorithm](/docs/en/papers/algorithms/mtut.md), [dataset](/docs/en/papers/datasets/nvgesture.md) and [experiment results](/configs/hand/gesture_sview_rgbd_vid/mtut/nvgesture/i3d_nvgesture.md)
+- Major upgrade to the Webcam API
+  - Tutorials ([EN](/docs/en/tutorials/7_webcam_api.md)|[zh_CN](/docs/zh_cn/tutorials/7_webcam_api.md))
+  - [API Reference](https://mmpose.readthedocs.io/en/latest/api.html#mmpose-apis-webcam)
+  - [Demo](/demo/docs/webcam_demo.md)
+>>>>>>> 94f1dbcb (Bump version v0.27.0 (#1414)):docs/en/changelog.md
 
 **New Features**
 
@@ -86,16 +99,22 @@ This release is meant to fix the compatibility with the latest mmcv v1.6.1
 **Improvements**
 
 - Upgrade Webcam API and related documents ([#1393](https://github.com/open-mmlab/mmpose/pull/1393), [#1404](https://github.com/open-mmlab/mmpose/pull/1404), [#1413](https://github.com/open-mmlab/mmpose/pull/1413)) @ly015
+<<<<<<< HEAD:docs/zh_cn/notes/changelog.md
 
 - Support exporting COCO inference result without the annotation file ([#1368](https://github.com/open-mmlab/mmpose/pull/1368)) @liqikai9
 
 - Replace markdownlint with mdformat in CI to avoid the dependence on ruby [#1382](https://github.com/open-mmlab/mmpose/pull/1382) @ly015
 
+=======
+- Support exporting COCO inference result without the annotation file ([#1368](https://github.com/open-mmlab/mmpose/pull/1368)) @liqikai9
+- Replace markdownlint with mdformat in CI to avoid the dependence on ruby [#1382](https://github.com/open-mmlab/mmpose/pull/1382) @ly015
+>>>>>>> 94f1dbcb (Bump version v0.27.0 (#1414)):docs/en/changelog.md
 - Improve documentation quality ([#1385](https://github.com/open-mmlab/mmpose/pull/1385), [#1394](https://github.com/open-mmlab/mmpose/pull/1394), [#1395](https://github.com/open-mmlab/mmpose/pull/1395), [#1408](https://github.com/open-mmlab/mmpose/pull/1408)) @chubei-oppen, @ly015, @liqikai9
 
 **Bug Fixes**
 
 - Fix xywh->xyxy bbox conversion in dataset sanity check ([#1367](https://github.com/open-mmlab/mmpose/pull/1367)) @jin-s13
+<<<<<<< HEAD:docs/zh_cn/notes/changelog.md
 
 - Fix a bug in two-stage 3D keypoint demo ([#1373](https://github.com/open-mmlab/mmpose/pull/1373)) @ly015
 
@@ -112,6 +131,17 @@ This release is meant to fix the compatibility with the latest mmcv v1.6.1
 - Remove redundant transformer modules from `mmpose.datasets.backbones.utils` ([#1405](https://github.com/open-mmlab/mmpose/pull/1405)) @ly015
 
 ## **v0.26.0 (05/05/2022)**
+=======
+- Fix a bug in two-stage 3D keypoint demo ([#1373](https://github.com/open-mmlab/mmpose/pull/1373)) @ly015
+- Fix out-dated settings in PVT configs ([#1376](https://github.com/open-mmlab/mmpose/pull/1376)) @ly015
+- Fix myst settings for document compiling ([#1381](https://github.com/open-mmlab/mmpose/pull/1381)) @ly015
+- Fix a bug in bbox transform ([#1384](https://github.com/open-mmlab/mmpose/pull/1384)) @ly015
+- Fix inaccurate description of `min_keypoints` in tracking apis ([#1398](https://github.com/open-mmlab/mmpose/pull/1398)) @pallgeuer
+- Fix warning with `torch.meshgrid` ([#1402](https://github.com/open-mmlab/mmpose/pull/1402)) @pallgeuer
+- Remove redundant transformer modules from `mmpose.datasets.backbones.utils` ([#1405](https://github.com/open-mmlab/mmpose/pull/1405)) @ly015
+
+## v0.26.0 (05/05/2022)
+>>>>>>> 94f1dbcb (Bump version v0.27.0 (#1414)):docs/en/changelog.md
 
 **Highlights**
 
