@@ -1,18 +1,27 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 <<<<<<< HEAD
+<<<<<<< HEAD
 import logging
 =======
 >>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
+=======
+import logging
+>>>>>>> b30b3bca ([Fix] fix deadlock in webcam demo (#1430))
 from collections import defaultdict
 from contextlib import contextmanager
 from threading import Event
 from typing import Optional
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 logger = logging.getLogger('Event')
 
 =======
 >>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
+=======
+logger = logging.getLogger('Event')
+
+>>>>>>> b30b3bca ([Fix] fix deadlock in webcam demo (#1430))
 
 class EventManager():
     """A helper class to manage events.
@@ -53,9 +62,13 @@ class EventManager():
             event_name = self._get_keyboard_event_name(event_name)
         self._events[event_name].set()
 <<<<<<< HEAD
+<<<<<<< HEAD
         logger.info(f'Event {event_name} is set.')
 =======
 >>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
+=======
+        logger.info(f'Event {event_name} is set.')
+>>>>>>> b30b3bca ([Fix] fix deadlock in webcam demo (#1430))
 
     def wait(self,
              event_name: str = None,
@@ -107,9 +120,13 @@ class EventManager():
             event_name = self._get_keyboard_event_name(event_name)
         self._events[event_name].clear()
 <<<<<<< HEAD
+<<<<<<< HEAD
         logger.info(f'Event {event_name} is cleared.')
 =======
 >>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
+=======
+        logger.info(f'Event {event_name} is cleared.')
+>>>>>>> b30b3bca ([Fix] fix deadlock in webcam demo (#1430))
 
     @staticmethod
     def _get_keyboard_event_name(key):

@@ -29,6 +29,10 @@ DEFAULT_DISPLAY_BUFFER_SIZE = 0
 DEFAULT_USER_BUFFER_SIZE = 1
 
 logger = logging.getLogger('Executor')
+<<<<<<< HEAD
+=======
+
+>>>>>>> b30b3bca ([Fix] fix deadlock in webcam demo (#1430))
 
 <<<<<<< HEAD
 
@@ -159,10 +163,14 @@ class WebcamExecutor():
         # create full buffer/event managers and can
         for node in self.node_list:
 <<<<<<< HEAD
+<<<<<<< HEAD
             logger.info(f'Set executor for node: {node.name})')
 =======
             logging.info(f'Set executor for node: {node.name})')
 >>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
+=======
+            logger.info(f'Set executor for node: {node.name})')
+>>>>>>> b30b3bca ([Fix] fix deadlock in webcam demo (#1430))
             node.set_executor(self)
 
     def _read_camera(self):
@@ -221,10 +229,15 @@ class WebcamExecutor():
                 else:
                     logger.info('Reached the end of the video.')
                     # Put a video ending signal
+<<<<<<< HEAD
                     self.buffer_manager.put_force('_frame_',
                                                   VideoEndingMessage())
                     self.buffer_manager.put_force('_input_',
                                                   VideoEndingMessage())
+=======
+                    self.buffer_manager.put('_frame_', VideoEndingMessage())
+                    self.buffer_manager.put('_input_', VideoEndingMessage())
+>>>>>>> b30b3bca ([Fix] fix deadlock in webcam demo (#1430))
                     # Wait for `_exit_` event util a timeout occurs
                     if not self.event_manager.wait('_exit_', timeout=5.0):
                         break
@@ -325,10 +338,14 @@ class WebcamExecutor():
 
             # joint non-daemon nodes and executor threads
 <<<<<<< HEAD
+<<<<<<< HEAD
             logger.info('Camera reading is about to join.')
 =======
             logging.info('Camera reading about to join')
 >>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
+=======
+            logger.info('Camera reading is about to join.')
+>>>>>>> b30b3bca ([Fix] fix deadlock in webcam demo (#1430))
             t_read.join()
 
             for node in non_daemon_nodes:

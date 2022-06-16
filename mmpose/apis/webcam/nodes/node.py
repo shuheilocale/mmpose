@@ -413,6 +413,7 @@ class Node(Thread, metaclass=ABCMeta):
                 self._send_output_to_buffers(output_msg)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< HEAD:mmpose/apis/webcam/nodes/node.py
         self.logger.info('Process ends.')
 =======
@@ -469,3 +470,6 @@ class MultiInputNode(Node):
 =======
         logging.info(f'Node "{self.name}": process ending.')
 >>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
+=======
+        self.logger.info('Process ends.')
+>>>>>>> b30b3bca ([Fix] fix deadlock in webcam demo (#1430))

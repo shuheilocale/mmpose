@@ -1,8 +1,11 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import logging
 >>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
+=======
+>>>>>>> b30b3bca ([Fix] fix deadlock in webcam demo (#1430))
 from queue import Full, Queue
 from threading import Thread
 from typing import List, Union
@@ -84,6 +87,7 @@ class RecorderNode(Node):
                 self.queue.put(img, timeout=1)
                 img_queued = True
 <<<<<<< HEAD
+<<<<<<< HEAD
                 self.logger.info('Recorder received one frame.')
             except Full:
                 self.logger.warn('Recorder jamed!')
@@ -93,6 +97,11 @@ class RecorderNode(Node):
             except Full:
                 logging.info(f'Node "{self.name}": recorder jamed!')
 >>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
+=======
+                self.logger.info('Recorder received one frame.')
+            except Full:
+                self.logger.warn('Recorder jamed!')
+>>>>>>> b30b3bca ([Fix] fix deadlock in webcam demo (#1430))
 
         return input_msg
 
@@ -118,10 +127,14 @@ class RecorderNode(Node):
             self.vwriter.write(img)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         self.logger.info('Recorder released.')
 =======
         logging.info('Video recorder released!')
 >>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
+=======
+        self.logger.info('Recorder released.')
+>>>>>>> b30b3bca ([Fix] fix deadlock in webcam demo (#1430))
         if self.vwriter is not None:
             self.vwriter.release()
 
@@ -137,9 +150,13 @@ class RecorderNode(Node):
         if self.t_record.is_alive():
             # Force to release self.vwriter
 <<<<<<< HEAD
+<<<<<<< HEAD
             self.logger.warn('Recorder forced release!')
 =======
             logging.info('Video recorder forced release!')
 >>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
+=======
+            self.logger.warn('Recorder forced release!')
+>>>>>>> b30b3bca ([Fix] fix deadlock in webcam demo (#1430))
             if self.vwriter is not None:
                 self.vwriter.release()
