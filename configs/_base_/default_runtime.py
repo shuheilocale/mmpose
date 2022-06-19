@@ -1,5 +1,6 @@
 default_scope = 'mmpose'
 
+<<<<<<< HEAD
 # hooks
 default_hooks = dict(
     timer=dict(type='IterTimerHook'),
@@ -9,6 +10,15 @@ default_hooks = dict(
     sampler_seed=dict(type='DistSamplerSeedHook'),
     visualization=dict(type='PoseVisualizationHook', enable=False),
 )
+=======
+log_config = dict(
+    interval=50,
+    hooks=[
+        dict(type='TextLoggerHook'),
+        # dict(type='TensorboardLoggerHook')
+        # dict(type='PaviLoggerHook') # for internal services
+    ])
+>>>>>>> 9d7bbe16 (Pavi logger hook (#1434))
 
 # custom hooks
 custom_hooks = [
