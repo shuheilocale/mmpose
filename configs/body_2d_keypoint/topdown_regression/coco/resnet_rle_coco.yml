@@ -3,9 +3,15 @@ Collections:
   Paper:
     Title: Human pose regression with residual log-likelihood estimation
     URL: https://arxiv.org/abs/2107.11291
+<<<<<<< HEAD:configs/body_2d_keypoint/topdown_regression/coco/resnet_rle_coco.yml
   README: https://github.com/open-mmlab/mmpose/blob/main/docs/src/papers/techniques/rle.md
 Models:
 - Config: configs/body_2d_keypoint/topdown_regression/coco/td-reg_res50_rle-8xb64-210e_coco-256x192.py
+=======
+  README: https://github.com/open-mmlab/mmpose/blob/master/docs/en/papers/algorithms/rle.md
+Models:
+- Config: configs/body/2d_kpt_sview_rgb_img/deeppose/coco/res50_coco_256x192_rle.py
+>>>>>>> b46ecc72 ([Feature] Support RLE for COCO (#1424)):configs/body/2d_kpt_sview_rgb_img/deeppose/coco/resnet_rle_coco.yml
   In Collection: RLE
   Metadata:
     Architecture: &id001
@@ -13,6 +19,7 @@ Models:
     - RLE
     - ResNet
     Training Data: COCO
+<<<<<<< HEAD:configs/body_2d_keypoint/topdown_regression/coco/resnet_rle_coco.yml
   Name: td-reg_res50_rle-8xb64-210e_coco-256x192
   Results:
   - Dataset: COCO
@@ -25,10 +32,25 @@ Models:
     Task: Body 2D Keypoint
   Weights: https://download.openmmlab.com/mmpose/v1/body_2d_keypoint/topdown_regression/coco/td-reg_res50_rle-8xb64-210e_coco-256x192-d37efd64_20220913.pth
 - Config: configs/body_2d_keypoint/topdown_regression/coco/td-reg_res50_rle-pretrained-8xb64-210e_coco-256x192.py
+=======
+  Name: deeppose_res50_coco_256x192_rle
+  Results:
+  - Dataset: COCO
+    Metrics:
+      AP: 0.704
+      AP@0.5: 0.883
+      AP@0.75: 0.777
+      AR: 0.751
+      AR@0.5: 0.92
+    Task: Body 2D Keypoint
+  Weights: https://download.openmmlab.com/mmpose/top_down/deeppose/deeppose_res50_coco_256x192_rle-2ea9bb4a_20220616.pth
+- Config: configs/body/2d_kpt_sview_rgb_img/deeppose/coco/res101_coco_256x192_rle.py
+>>>>>>> b46ecc72 ([Feature] Support RLE for COCO (#1424)):configs/body/2d_kpt_sview_rgb_img/deeppose/coco/resnet_rle_coco.yml
   In Collection: RLE
   Metadata:
     Architecture: *id001
     Training Data: COCO
+<<<<<<< HEAD:configs/body_2d_keypoint/topdown_regression/coco/resnet_rle_coco.yml
   Name: td-reg_res50_rle-pretrained-8xb64-210e_coco-256x192
   Results:
   - Dataset: COCO
@@ -46,6 +68,9 @@ Models:
     Architecture: *id001
     Training Data: COCO
   Name: td-reg_res101_rle-8xb64-210e_coco-256x192
+=======
+  Name: deeppose_res101_coco_256x192_rle
+>>>>>>> b46ecc72 ([Feature] Support RLE for COCO (#1424)):configs/body/2d_kpt_sview_rgb_img/deeppose/coco/resnet_rle_coco.yml
   Results:
   - Dataset: COCO
     Metrics:
@@ -56,12 +81,20 @@ Models:
       AR@0.5: 0.93
     Task: Body 2D Keypoint
   Weights: https://download.openmmlab.com/mmpose/top_down/deeppose/deeppose_res101_coco_256x192_rle-16c3d461_20220615.pth
+<<<<<<< HEAD:configs/body_2d_keypoint/topdown_regression/coco/resnet_rle_coco.yml
 - Config: configs/body_2d_keypoint/topdown_regression/coco/td-reg_res152_rle-8xb64-210e_coco-256x192.py
+=======
+- Config: configs/body/2d_kpt_sview_rgb_img/deeppose/coco/res152_coco_256x192_rle.py
+>>>>>>> b46ecc72 ([Feature] Support RLE for COCO (#1424)):configs/body/2d_kpt_sview_rgb_img/deeppose/coco/resnet_rle_coco.yml
   In Collection: RLE
   Metadata:
     Architecture: *id001
     Training Data: COCO
+<<<<<<< HEAD:configs/body_2d_keypoint/topdown_regression/coco/resnet_rle_coco.yml
   Name: td-reg_res152_rle-8xb64-210e_coco-256x192
+=======
+  Name: deeppose_res152_coco_256x192_rle
+>>>>>>> b46ecc72 ([Feature] Support RLE for COCO (#1424)):configs/body/2d_kpt_sview_rgb_img/deeppose/coco/resnet_rle_coco.yml
   Results:
   - Dataset: COCO
     Metrics:
@@ -72,12 +105,20 @@ Models:
       AR@0.5: 0.933
     Task: Body 2D Keypoint
   Weights: https://download.openmmlab.com/mmpose/top_down/deeppose/deeppose_res152_coco_256x192_rle-c05bdccf_20220615.pth
+<<<<<<< HEAD:configs/body_2d_keypoint/topdown_regression/coco/resnet_rle_coco.yml
 - Config: configs/body_2d_keypoint/topdown_regression/coco/td-reg_res152_rle-8xb64-210e_coco-384x288.py
+=======
+- Config: configs/body/2d_kpt_sview_rgb_img/deeppose/coco/res152_coco_384x288_rle.py
+>>>>>>> b46ecc72 ([Feature] Support RLE for COCO (#1424)):configs/body/2d_kpt_sview_rgb_img/deeppose/coco/resnet_rle_coco.yml
   In Collection: RLE
   Metadata:
     Architecture: *id001
     Training Data: COCO
+<<<<<<< HEAD:configs/body_2d_keypoint/topdown_regression/coco/resnet_rle_coco.yml
   Name: td-reg_res152_rle-8xb64-210e_coco-384x288
+=======
+  Name: deeppose_res152_coco_384x288_rle
+>>>>>>> b46ecc72 ([Feature] Support RLE for COCO (#1424)):configs/body/2d_kpt_sview_rgb_img/deeppose/coco/resnet_rle_coco.yml
   Results:
   - Dataset: COCO
     Metrics:
