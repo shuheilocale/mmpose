@@ -224,11 +224,15 @@ mmpose
 
 </details>
 
+<<<<<<< HEAD:docs/en/dataset_zoo/2d_face_keypoint.md
 <div align="center">
   <img src="https://user-images.githubusercontent.com/100993824/227786792-06604943-c062-4bcd-bb2d-a2f78d80115b.png" height="200px">
 </div>
 
 For COFW data, please download from [COFW Dataset (Color Images)](http://www.vision.caltech.edu/xpburgos/ICCV13/Data/COFW_color.zip).
+=======
+For COFW data, please download from [COFW Dataset (Color Images)](https://data.caltech.edu/records/20099).
+>>>>>>> ca26778e (fix COFW Dataset link (#1458)):docs/en/tasks/2d_face_keypoint.md
 Move `COFW_train_color.mat` and `COFW_test_color.mat` to `data/cofw/` and make them look like:
 
 ```text
