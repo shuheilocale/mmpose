@@ -1,10 +1,14 @@
 # Copyright (c) Open-MMLab. All rights reserved.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __version__ = '1.0.0'
 =======
 __version__ = '0.27.0'
 >>>>>>> 94f1dbcb (Bump version v0.27.0 (#1414))
+=======
+__version__ = '0.28.0'
+>>>>>>> 5123a2a7 (Bump version 0.28.0 (#1468))
 short_version = __version__
 
 
