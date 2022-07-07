@@ -80,6 +80,7 @@ This release is meant to fix the compatibility with the latest mmcv v1.6.1
 **Bug Fixes**
 
 <<<<<<< HEAD:docs/zh_cn/notes/changelog.md
+<<<<<<< HEAD:docs/zh_cn/notes/changelog.md
 - Rename `custom_hooks_config` to `custom_hooks` in configs to align with the documentation ([#1427](https://github.com/open-mmlab/mmpose/pull/1427)) @ly015
 
 - Fix deadlock issue in Webcam API ([#1430](https://github.com/open-mmlab/mmpose/pull/1430)) @ly015
@@ -90,6 +91,9 @@ This release is meant to fix the compatibility with the latest mmcv v1.6.1
 =======
 =======
 - Rename `custom_hooks_config` to `cust_hooks` in configs to align with the documentation ([#1427](https://github.com/open-mmlab/mmpose/pull/1427)) @ly015
+=======
+- Rename `custom_hooks_config` to `custom_hooks` in configs to align with the documentation ([#1427](https://github.com/open-mmlab/mmpose/pull/1427)) @ly015
+>>>>>>> eeebc652 (Update changelog.md):docs/en/changelog.md
 - Fix deadlock issue in Webcam API ([#1430](https://github.com/open-mmlab/mmpose/pull/1430)) @ly015
 - Fix smoother configs in video 3D demo ([#1457](https://github.com/open-mmlab/mmpose/pull/1457)) @ly015
 
