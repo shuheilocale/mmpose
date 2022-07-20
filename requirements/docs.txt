@@ -1,5 +1,9 @@
 docutils==0.16.0
+<<<<<<< HEAD
 markdown
+=======
+markdown<3.4.0
+>>>>>>> 6a5888ed ([Fix] Fix some typos in configs (#1496))
 myst-parser
 -e git+https://github.com/gaotongxiao/pytorch_sphinx_theme.git#egg=pytorch_sphinx_theme
 sphinx==4.5.0
