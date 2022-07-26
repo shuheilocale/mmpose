@@ -90,7 +90,23 @@ https://user-images.githubusercontent.com/15977946/124654387-0fd3c500-ded1-11eb-
 
 ## Installation
 
+<<<<<<< HEAD
 Please refer to [installation.md](https://mmpose.readthedocs.io/en/latest/installation.html) for more detailed installation and dataset preparation.
+=======
+MMPose depends on [PyTorch](https://pytorch.org/) and [MMCV](https://github.com/open-mmlab/mmcv).
+Below are quick steps for installation.
+Please refer to [install.md](docs/en/install.md) for detailed installation guide.
+
+```shell
+conda create -n openmmlab python=3.8 pytorch=1.10 cudatoolkit=11.3 torchvision -c pytorch -y
+conda activate openmmlab
+pip3 install openmim
+mim install mmcv-full
+git clone https://github.com/open-mmlab/mmpose.git
+cd mmpose
+pip3 install -e .
+```
+>>>>>>> b4d2021f (Unify the name of the environment. (#1507))
 
 ## Getting Started
 

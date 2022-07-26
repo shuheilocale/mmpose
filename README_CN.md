@@ -64,7 +64,11 @@ https://user-images.githubusercontent.com/15977946/124654387-0fd3c500-ded1-11eb-
 
 - **支持多样的数据集**
 
+<<<<<<< HEAD
   MMPose 支持了很多主流数据集的准备和构建，如 COCO、 MPII 等。 具体请参考 [数据集](docs/zh_cn/dataset_zoo)。
+=======
+  MMPose 支持了很多主流数据集的准备和构建，如 COCO、AIC、MPII、MPII-TRB、OCHuman 等。 具体请参考 [数据集准备](docs/en/data_preparation.md)。
+>>>>>>> b4d2021f (Unify the name of the environment. (#1507))
 
 - **模块化设计**
 
@@ -92,8 +96,8 @@ MMPose 依赖 [PyTorch](https://pytorch.org/) 和 [MMCV](https://github.com/open
 更详细的安装指南请参考 [install.md](docs/zh_cn/install.md)。
 
 ```shell
-conda create -n open-mmlab python=3.8 pytorch=1.10 cudatoolkit=11.3 torchvision -c pytorch -y
-conda activate open-mmlab
+conda create -n openmmlab python=3.8 pytorch=1.10 cudatoolkit=11.3 torchvision -c pytorch -y
+conda activate openmmlab
 pip3 install openmim
 mim install mmcv-full
 git clone https://github.com/open-mmlab/mmpose.git
@@ -226,6 +230,31 @@ MMPose 也提供了其他更详细的教程:
 
 我们将跟进学界的最新进展，并支持更多算法和框架。如果您对 MMPose 有任何功能需求，请随时在 [MMPose Roadmap](https://github.com/open-mmlab/mmpose/issues/9) 中留言。
 
+<<<<<<< HEAD
+=======
+### 基准测试
+
+#### 训练精度和速度
+
+MMPose 在主流关键点检测基准 COCO 上达到了优越的模型精度和训练速度。
+
+详细信息可见 [基准测试](docs/en/benchmark.md)(英文)。
+
+#### 推理速度
+
+我们总结了 MMPose 中主要模型的复杂度信息和推理速度，包括模型的计算复杂度、参数数量，以及以不同的批处理大小在 CPU 和 GPU 上的推理速度。
+
+详细信息可见 [模型推理速度](docs/zh_cn/inference_speed_summary.md)。
+
+## 数据准备
+
+请参考 [data_preparation.md](docs/en/data_preparation.md)（英文） 进行数据集准备。
+
+## 常见问题
+
+请参考 [FAQ](docs/zh_cn/faq.md) 了解其他用户的常见问题。
+
+>>>>>>> b4d2021f (Unify the name of the environment. (#1507))
 ## 参与贡献
 
 我们非常欢迎用户对于 MMPose 做出的任何贡献，可以参考 [贡献指南](https://mmpose.readthedocs.io/zh_CN/latest/contribution_guide.html) 文件了解更多细节。
