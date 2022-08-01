@@ -405,6 +405,7 @@ mmpose
 
 </details>
 
+<<<<<<< HEAD:docs/zh_cn/dataset_zoo/2d_body_keypoint.md
 <div align="center">
   <img src="https://user-images.githubusercontent.com/100993824/227865114-3f98c673-f6d0-4518-ae99-653f475f9fc8.png" height="300px">
 </div>
@@ -414,6 +415,12 @@ Please download the annotation files from [posetrack18_annotations](https://down
 We have merged the video-wise separated official annotation files into two json files (posetrack18_train & posetrack18_val.json). We also generate the [mask files](https://download.openmmlab.com/mmpose/datasets/posetrack18_mask.tar) to speed up training.
 For top-down approaches, we use [MMDetection](https://github.com/open-mmlab/mmdetection) pre-trained [Cascade R-CNN](https://download.openmmlab.com/mmdetection/v2.0/cascade_rcnn/cascade_rcnn_x101_64x4d_fpn_20e_coco/cascade_rcnn_x101_64x4d_fpn_20e_coco_20200509_224357-051557b1.pth) (X-101-64x4d-FPN) to generate the detected human bounding boxes.
 Please download and extract them under $MMPOSE/data, and make them look like this:
+=======
+请从此链接 [PoseTrack18](https://posetrack.net/users/download.php)下载数据文件，并从此链接 [posetrack18_annotations](https://download.openmmlab.com/mmpose/datasets/posetrack18_annotations.tar)下载标注文件。
+我们已将官方提供的所有单视频标注文件合并为两个 json 文件 (posetrack18_train & posetrack18_val.json)，并生成了 [mask files](https://download.openmmlab.com/mmpose/datasets/posetrack18_mask.tar) 来加速训练。
+对于 top-down 的方法， 我们使用 [MMDetection](https://github.com/open-mmlab/mmdetection) 的预训练 [Cascade R-CNN](https://download.openmmlab.com/mmdetection/v2.0/cascade_rcnn/cascade_rcnn_x101_64x4d_fpn_20e_coco/cascade_rcnn_x101_64x4d_fpn_20e_coco_20200509_224357-051557b1.pth) (X-101-64x4d-FPN) 来生成人体的检测框。
+请将数据置于 $MMPOSE/data 目录下，并整理成如下的格式：
+>>>>>>> 1807afc4 (Update 2d_body_keypoint.md. (#1525)):docs/zh_cn/tasks/2d_body_keypoint.md
 
 ```text
 mmpose
@@ -501,6 +508,7 @@ pip install git+https://github.com/svenkreiss/poseval.git
 
 </details>
 
+<<<<<<< HEAD:docs/zh_cn/dataset_zoo/2d_body_keypoint.md
 <div align="center">
   <img src="https://user-images.githubusercontent.com/100993824/227865619-d65f64ae-991d-4693-99c2-caecd1beb1fc.png" height="300px">
 </div>
@@ -508,6 +516,11 @@ pip install git+https://github.com/svenkreiss/poseval.git
 For [sub-JHMDB](http://jhmdb.is.tue.mpg.de/dataset) data, please download the [images](<(http://files.is.tue.mpg.de/jhmdb/Rename_Images.tar.gz)>) from [JHMDB](http://jhmdb.is.tue.mpg.de/dataset),
 Please download the annotation files from [jhmdb_annotations](https://download.openmmlab.com/mmpose/datasets/jhmdb_annotations.tar).
 Move them under $MMPOSE/data, and make them look like this:
+=======
+对于 [sub-JHMDB](http://jhmdb.is.tue.mpg.de/dataset) 数据集，请从此链接 [JHMDB](http://files.is.tue.mpg.de/jhmdb/Rename_Images.tar.gz) 下载images，
+请从此链接 [jhmdb_annotations](https://download.openmmlab.com/mmpose/datasets/jhmdb_annotations.tar)下载标注文件。
+将它们移至 $MMPOSE/data目录下， 使得文件呈如下的格式：
+>>>>>>> 1807afc4 (Update 2d_body_keypoint.md. (#1525)):docs/zh_cn/tasks/2d_body_keypoint.md
 
 ```text
 mmpose
