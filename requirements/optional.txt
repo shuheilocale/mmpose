@@ -1,1 +1,8 @@
+<<<<<<< HEAD
+=======
+onnx
+onnxruntime
+poseval@git+https://github.com/svenkreiss/poseval.git
+pyrender
+>>>>>>> b52e4dfb (Added the 'Optional' extra require in setup.py (#1491))
 requests

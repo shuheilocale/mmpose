@@ -192,7 +192,11 @@ if __name__ == '__main__':
 =======
             'build': parse_requirements('requirements/build.txt'),
             'runtime': parse_requirements('requirements/runtime.txt'),
+<<<<<<< HEAD
 >>>>>>> 16027f63 ([Enhancement] Add mminstall.txt in setup.py (#1425))
+=======
+            'optional': parse_requirements('requirements/optional.txt'),
+>>>>>>> b52e4dfb (Added the 'Optional' extra require in setup.py (#1491))
             'mim': parse_requirements('requirements/mminstall.txt'),
         },
         zip_safe=False)
