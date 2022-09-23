@@ -18,7 +18,7 @@ from mmpose.datasets.dataset_info import DatasetInfo
 
 
 def get_eye_keypoint_ids(model_cfg: Config) -> Tuple[int, int]:
-    """A helpfer function to get the keypoint indices of left and right eyes
+    """A helper function to get the keypoint indices of left and right eyes
     from the model config.
 
     Args:
@@ -82,8 +82,8 @@ def get_face_keypoint_ids(dataset_meta: Dict) -> List:
         dataset_meta (dict): dataset meta information.
 =======
 def get_face_keypoint_ids(model_cfg: Config) -> List:
-    """A helpfer function to get the keypoint indices of the face from the
-    model config.
+    """A helper function to get the keypoint indices of the face from the model
+    config.
 
     Args:
         model_cfg (Config): pose model config.
@@ -136,7 +136,7 @@ def get_wrist_keypoint_ids(dataset_meta: Dict) -> Tuple[int, int]:
         dataset_meta (dict): dataset meta information.
 =======
 def get_wrist_keypoint_ids(model_cfg: Config) -> Tuple[int, int]:
-    """A helpfer function to get the keypoint indices of left and right wrists
+    """A helper function to get the keypoint indices of left and right wrists
     from the model config.
 
     Args:
@@ -204,8 +204,7 @@ def get_mouth_keypoint_ids(dataset_meta: Dict) -> int:
         dataset_meta (dict): dataset meta information.
 =======
 def get_mouth_keypoint_ids(model_cfg: Config) -> int:
-    """A helpfer function to get the mouth keypoint index from the model
-    config.
+    """A helper function to get the mouth keypoint index from the model config.
 
     Args:
         model_cfg (Config): pose model config.
@@ -294,7 +293,7 @@ def get_hand_keypoint_ids(dataset_meta: Dict) -> List[int]:
         if dataset_name in {'coco_wholebody'}:
 =======
 def get_hand_keypoint_ids(model_cfg: Config) -> List[int]:
-    """A helpfer function to get the keypoint indices of left and right hand
+    """A helper function to get the keypoint indices of left and right hand
     from the model config.
 
     Args:
