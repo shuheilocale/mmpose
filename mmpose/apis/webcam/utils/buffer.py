@@ -1,8 +1,11 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 from __future__ import annotations
 >>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
+=======
+>>>>>>> 2b0cd7a3 ([Fix] Upgrade the versions of pre-commit-hooks (#1706))
 from functools import wraps
 from queue import Queue
 from typing import Any, Dict, List, Optional
@@ -182,10 +185,14 @@ class BufferManager():
         return self._buffers[name].full()
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     def get_sub_manager(self, buffer_names: List[str]) -> 'BufferManager':
 =======
     def get_sub_manager(self, buffer_names: List[str]) -> BufferManager:
 >>>>>>> 78c4c99c ([Refactor] Integrate webcam apis into MMPose package (#1404))
+=======
+    def get_sub_manager(self, buffer_names: List[str]) -> 'BufferManager':
+>>>>>>> 2b0cd7a3 ([Fix] Upgrade the versions of pre-commit-hooks (#1706))
         """Return a :class:`BufferManager` instance that covers a subset of the
         buffers in the parent. The is usually used to partially share the
         buffers of the executor to the node.
