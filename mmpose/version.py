@@ -3,6 +3,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 __version__ = '1.0.0'
 =======
 __version__ = '0.27.0'
@@ -13,6 +14,9 @@ __version__ = '0.28.0'
 =======
 __version__ = '0.28.1'
 >>>>>>> efdfa1c8 (bump version v0.28.1)
+=======
+__version__ = '0.29.0'
+>>>>>>> e962ccf9 (bump version v0.29.0 (#1717))
 short_version = __version__
 
 
