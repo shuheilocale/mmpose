@@ -18,6 +18,7 @@ from .regression_loss import (BoneLoss, L1Loss, MPJPELoss, MSELoss, RLELoss,
 
 __all__ = [
 <<<<<<< HEAD
+<<<<<<< HEAD
     'KeypointMSELoss', 'KeypointOHKMMSELoss', 'SmoothL1Loss', 'WingLoss',
     'MPJPELoss', 'MSELoss', 'L1Loss', 'BCELoss', 'BoneLoss',
     'SemiSupervisionLoss', 'SoftWingLoss', 'AdaptiveWingLoss', 'RLELoss',
@@ -44,4 +45,11 @@ __all__ = [
     'RLELoss',
     'FocalHeatmapLoss',
 >>>>>>> fd7ff851 (Add CID to mmpose (#1604))
+=======
+    'JointsMSELoss', 'JointsOHKMMSELoss', 'HeatmapLoss', 'AELoss',
+    'MultiLossFactory', 'MeshLoss', 'GANLoss', 'SmoothL1Loss', 'WingLoss',
+    'MPJPELoss', 'MSELoss', 'L1Loss', 'BCELoss', 'BoneLoss',
+    'SemiSupervisionLoss', 'SoftWingLoss', 'AdaptiveWingLoss', 'RLELoss',
+    'SoftWeightSmoothL1Loss', 'FocalHeatmapLoss'
+>>>>>>> 3fbd7b69 ([Feature] support DEKR (#1693))
 ]

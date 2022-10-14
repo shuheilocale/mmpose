@@ -19,6 +19,7 @@ from .ae_simple_head import AESimpleHead
 from .cid_head import CIDHead
 from .deconv_head import DeconvHead
 from .deeppose_regression_head import DeepposeRegressionHead
+from .dekr_head import DEKRHead
 from .hmr_head import HMRMeshHead
 from .interhand_3d_head import Interhand3DHead
 from .mtut_head import MultiModalSSAHead
@@ -36,6 +37,10 @@ __all__ = [
     'AEHigherResolutionHead', 'AESimpleHead', 'AEMultiStageHead', 'CIDHead',
     'DeepposeRegressionHead', 'TemporalRegressionHead', 'Interhand3DHead',
     'HMRMeshHead', 'DeconvHead', 'ViPNASHeatmapSimpleHead', 'CuboidCenterHead',
+<<<<<<< HEAD
     'CuboidPoseHead', 'MultiModalSSAHead'
 >>>>>>> d3c17d5e ([Feature] Gesture recognition algorithm MTUT on NVGesture dataset (#1380))
+=======
+    'CuboidPoseHead', 'MultiModalSSAHead', 'DEKRHead'
+>>>>>>> 3fbd7b69 ([Feature] support DEKR (#1693))
 ]
