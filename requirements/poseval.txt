@@ -1,2 +1,5 @@
 poseval@git+https://github.com/svenkreiss/poseval.git
+<<<<<<< HEAD
 shapely==1.8.4
+=======
+>>>>>>> 0d9a00c1 ([Fix] Fix pypi depoyment (#1720))
