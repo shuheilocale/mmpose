@@ -300,11 +300,266 @@ def inference_topdown(model: nn.Module,
         data_info.update(model.dataset_meta)
         data_list.append(pipeline(data_info))
 
+<<<<<<< HEAD
     if data_list:
         # collate data list into a batch, which is a dict with following keys:
         # batch['inputs']: a list of input images
         # batch['data_samples']: a list of :obj:`PoseDataSample`
         batch = pseudo_collate(data_list)
+=======
+        data = test_pipeline(data)
+        batch_data.append(data)
+
+    batch_data = collate(batch_data, samples_per_gpu=len(batch_data))
+    batch_data = scatter(batch_data, [device])[0]
+
+    # forward the model
+    with torch.no_grad():
+        result = model(
+            img=batch_data['img'],
+            img_metas=batch_data['img_metas'],
+            return_loss=False,
+            return_heatmap=return_heatmap)
+
+    return result['preds'], result['output_heatmap']
+
+
+@deprecated_api_warning(name_dict=dict(img_or_path='imgs_or_paths'))
+def inference_top_down_pose_model(model,
+                                  imgs_or_paths,
+                                  person_results=None,
+                                  bbox_thr=None,
+                                  format='xywh',
+                                  dataset='TopDownCocoDataset',
+                                  dataset_info=None,
+                                  return_heatmap=False,
+                                  outputs=None):
+    """Inference a single image with a list of person bounding boxes. Support
+    single-frame and multi-frame inference setting.
+
+    Note:
+        - num_frames: F
+        - num_people: P
+        - num_keypoints: K
+        - bbox height: H
+        - bbox width: W
+
+    Args:
+        model (nn.Module): The loaded pose model.
+        imgs_or_paths (str | np.ndarray | list(str) | list(np.ndarray)):
+            Image filename(s) or loaded image(s).
+        person_results (list(dict), optional): a list of detected persons that
+            contains ``bbox`` and/or ``track_id``:
+
+            - ``bbox`` (4, ) or (5, ): The person bounding box, which contains
+                4 box coordinates (and score).
+            - ``track_id`` (int): The unique id for each human instance. If
+                not provided, a dummy person result with a bbox covering
+                the entire image will be used. Default: None.
+        bbox_thr (float | None): Threshold for bounding boxes. Only bboxes
+            with higher scores will be fed into the pose detector.
+            If bbox_thr is None, all boxes will be used.
+        format (str): bbox format ('xyxy' | 'xywh'). Default: 'xywh'.
+
+            - `xyxy` means (left, top, right, bottom),
+            - `xywh` means (left, top, width, height).
+        dataset (str): Dataset name, e.g. 'TopDownCocoDataset'.
+            It is deprecated. Please use dataset_info instead.
+        dataset_info (DatasetInfo): A class containing all dataset info.
+        return_heatmap (bool) : Flag to return heatmap, default: False
+        outputs (list(str) | tuple(str)) : Names of layers whose outputs
+            need to be returned. Default: None.
+
+    Returns:
+        tuple:
+        - pose_results (list[dict]): The bbox & pose info. \
+            Each item in the list is a dictionary, \
+            containing the bbox: (left, top, right, bottom, [score]) \
+            and the pose (ndarray[Kx3]): x, y, score.
+        - returned_outputs (list[dict[np.ndarray[N, K, H, W] | \
+            torch.Tensor[N, K, H, W]]]): \
+            Output feature maps from layers specified in `outputs`. \
+            Includes 'heatmap' if `return_heatmap` is True.
+    """
+    # decide whether to use multi frames for inference
+    if isinstance(imgs_or_paths, (list, tuple)):
+        use_multi_frames = True
+    else:
+        assert isinstance(imgs_or_paths, (str, np.ndarray))
+        use_multi_frames = False
+    # get dataset info
+    if (dataset_info is None and hasattr(model, 'cfg')
+            and 'dataset_info' in model.cfg):
+        dataset_info = DatasetInfo(model.cfg.dataset_info)
+    if dataset_info is None:
+        warnings.warn(
+            'dataset is deprecated.'
+            'Please set `dataset_info` in the config.'
+            'Check https://github.com/open-mmlab/mmpose/pull/663'
+            ' for details.', DeprecationWarning)
+
+    # only two kinds of bbox format is supported.
+    assert format in ['xyxy', 'xywh']
+
+    pose_results = []
+    returned_outputs = []
+
+    if person_results is None:
+        # create dummy person results
+        sample = imgs_or_paths[0] if use_multi_frames else imgs_or_paths
+        if isinstance(sample, str):
+            width, height = Image.open(sample).size
+        else:
+            height, width = sample.shape[:2]
+        person_results = [{'bbox': np.array([0, 0, width, height])}]
+
+    if len(person_results) == 0:
+        return pose_results, returned_outputs
+
+    # Change for-loop preprocess each bbox to preprocess all bboxes at once.
+    bboxes = np.array([box['bbox'] for box in person_results])
+
+    # Select bboxes by score threshold
+    if bbox_thr is not None:
+        assert bboxes.shape[1] == 5
+        valid_idx = np.where(bboxes[:, 4] > bbox_thr)[0]
+        bboxes = bboxes[valid_idx]
+        person_results = [person_results[i] for i in valid_idx]
+
+    if format == 'xyxy':
+        bboxes_xyxy = bboxes
+        bboxes_xywh = bbox_xyxy2xywh(bboxes)
+    else:
+        # format is already 'xywh'
+        bboxes_xywh = bboxes
+        bboxes_xyxy = bbox_xywh2xyxy(bboxes)
+
+    # if bbox_thr remove all bounding box
+    if len(bboxes_xywh) == 0:
+        return [], []
+
+    with OutputHook(model, outputs=outputs, as_tensor=False) as h:
+        # poses is results['pred'] # N x 17x 3
+        poses, heatmap = _inference_single_pose_model(
+            model,
+            imgs_or_paths,
+            bboxes_xywh,
+            dataset=dataset,
+            dataset_info=dataset_info,
+            return_heatmap=return_heatmap,
+            use_multi_frames=use_multi_frames)
+
+        if return_heatmap:
+            h.layer_outputs['heatmap'] = heatmap
+
+        returned_outputs.append(h.layer_outputs)
+
+    assert len(poses) == len(person_results), print(
+        len(poses), len(person_results), len(bboxes_xyxy))
+    for pose, person_result, bbox_xyxy in zip(poses, person_results,
+                                              bboxes_xyxy):
+        pose_result = person_result.copy()
+        pose_result['keypoints'] = pose
+        pose_result['bbox'] = bbox_xyxy
+        pose_results.append(pose_result)
+
+    return pose_results, returned_outputs
+
+
+def inference_bottom_up_pose_model(model,
+                                   img_or_path,
+                                   dataset='BottomUpCocoDataset',
+                                   dataset_info=None,
+                                   pose_nms_thr=0.9,
+                                   return_heatmap=False,
+                                   outputs=None):
+    """Inference a single image with a bottom-up pose model.
+
+    Note:
+        - num_people: P
+        - num_keypoints: K
+        - bbox height: H
+        - bbox width: W
+
+    Args:
+        model (nn.Module): The loaded pose model.
+        img_or_path (str| np.ndarray): Image filename or loaded image.
+        dataset (str): Dataset name, e.g. 'BottomUpCocoDataset'.
+            It is deprecated. Please use dataset_info instead.
+        dataset_info (DatasetInfo): A class containing all dataset info.
+        pose_nms_thr (float): retain oks overlap < pose_nms_thr, default: 0.9.
+        return_heatmap (bool) : Flag to return heatmap, default: False.
+        outputs (list(str) | tuple(str)) : Names of layers whose outputs
+            need to be returned, default: None.
+
+    Returns:
+        tuple:
+        - pose_results (list[np.ndarray]): The predicted pose info. \
+            The length of the list is the number of people (P). \
+            Each item in the list is a ndarray, containing each \
+            person's pose (np.ndarray[Kx3]): x, y, score.
+        - returned_outputs (list[dict[np.ndarray[N, K, H, W] | \
+            torch.Tensor[N, K, H, W]]]): \
+            Output feature maps from layers specified in `outputs`. \
+            Includes 'heatmap' if `return_heatmap` is True.
+    """
+    # get dataset info
+    if (dataset_info is None and hasattr(model, 'cfg')
+            and 'dataset_info' in model.cfg):
+        dataset_info = DatasetInfo(model.cfg.dataset_info)
+
+    if dataset_info is not None:
+        dataset_name = dataset_info.dataset_name
+        flip_index = dataset_info.flip_index
+        sigmas = getattr(dataset_info, 'sigmas', None)
+        skeleton = getattr(dataset_info, 'skeleton', None)
+    else:
+        warnings.warn(
+            'dataset is deprecated.'
+            'Please set `dataset_info` in the config.'
+            'Check https://github.com/open-mmlab/mmpose/pull/663 for details.',
+            DeprecationWarning)
+        assert (dataset == 'BottomUpCocoDataset')
+        dataset_name = dataset
+        flip_index = [0, 2, 1, 4, 3, 6, 5, 8, 7, 10, 9, 12, 11, 14, 13, 16, 15]
+        sigmas = None
+        skeleton = None
+
+    pose_results = []
+    returned_outputs = []
+
+    cfg = model.cfg
+    device = next(model.parameters()).device
+    if device.type == 'cpu':
+        device = -1
+
+    # build the data pipeline
+    test_pipeline = Compose(cfg.test_pipeline)
+    _pipeline_gpu_speedup(test_pipeline, next(model.parameters()).device)
+
+    # prepare data
+    data = {
+        'dataset': dataset_name,
+        'ann_info': {
+            'image_size': np.array(cfg.data_cfg['image_size']),
+            'heatmap_size': cfg.data_cfg.get('heatmap_size', None),
+            'num_joints': cfg.data_cfg['num_joints'],
+            'flip_index': flip_index,
+            'skeleton': skeleton,
+        }
+    }
+    if isinstance(img_or_path, np.ndarray):
+        data['img'] = img_or_path
+    else:
+        data['image_file'] = img_or_path
+
+    data = test_pipeline(data)
+    data = collate([data], samples_per_gpu=1)
+    data = scatter(data, [device])[0]
+
+    with OutputHook(model, outputs=outputs, as_tensor=False) as h:
+        # forward the model
+>>>>>>> e07b3c47 (modify bottom-up inference function to support dekr (#1734))
         with torch.no_grad():
             results = model.test_step(batch)
     else:
