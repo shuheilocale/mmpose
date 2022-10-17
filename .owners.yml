@@ -1,12 +1,18 @@
 assign:
+<<<<<<< HEAD
   issues: enabled
   pull_requests: disabled
+=======
+  issues: enable
+  pull_requests: disable
+>>>>>>> 4a86bdf0 ([Enhance] Add openmmlab-bot configuration for automatic issue assigning (#1736))
   strategy:
     # random
     daily-shift-based
   scedule:
     '*/1 * * * *'
   assignees:
+<<<<<<< HEAD
     - Tau-J
     - LareinaM
     - Ben-Louis
@@ -14,3 +20,10 @@ assign:
     - Ben-Louis
     - Tau-J
     - Tau-J
+=======
+    - ly015
+    - Tau-J
+    - liqikai9
+    - Ben-Louis
+    - Tau-J
+>>>>>>> 4a86bdf0 ([Enhance] Add openmmlab-bot configuration for automatic issue assigning (#1736))
