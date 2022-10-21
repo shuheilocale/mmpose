@@ -1,11 +1,16 @@
 assign:
 <<<<<<< HEAD
+<<<<<<< HEAD
   issues: enabled
   pull_requests: disabled
 =======
   issues: enable
   pull_requests: disable
 >>>>>>> 4a86bdf0 ([Enhance] Add openmmlab-bot configuration for automatic issue assigning (#1736))
+=======
+  issues: enabled
+  pull_requests: disabled
+>>>>>>> dae131ea (Update .owners.yml (#1754))
   strategy:
     # random
     daily-shift-based
