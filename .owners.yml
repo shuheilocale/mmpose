@@ -31,4 +31,9 @@ assign:
     - liqikai9
     - Ben-Louis
     - Tau-J
+<<<<<<< HEAD
 >>>>>>> 4a86bdf0 ([Enhance] Add openmmlab-bot configuration for automatic issue assigning (#1736))
+=======
+    - ly015
+    - ly015
+>>>>>>> 8c58a18b (Update .owners.yml (#1762))
