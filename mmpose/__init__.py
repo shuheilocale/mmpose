@@ -23,8 +23,12 @@ def digit_version(version_str):
 
 
 mmcv_minimum_version = '1.3.8'
+<<<<<<< HEAD
 mmcv_maximum_version = '1.7.0'
 >>>>>>> c1460e48 ([Fix] Update mmcv and markdown dependency version (#1516))
+=======
+mmcv_maximum_version = '1.8.0'
+>>>>>>> d03e249e (update maximum mmcv version to 1.8.0 (#1796))
 mmcv_version = digit_version(mmcv.__version__)
 
 mmengine_minimum_version = '0.6.0'
