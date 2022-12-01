@@ -228,10 +228,13 @@ mmpose
 
 </details>
 
+<<<<<<< HEAD:docs/en/dataset_zoo/2d_animal_keypoint.md
 <div align="center">
   <img src="https://user-images.githubusercontent.com/100993824/227799576-f10f8469-9432-4139-beb4-195037dee72c.png" height="200px">
 </div>
 
+=======
+>>>>>>> 8e6169b1 ([Fix] Update MacaquePose dataset link (#1847)):docs/en/tasks/2d_animal_keypoint.md
 For [MacaquePose](http://pri.ehub.kyoto-u.ac.jp/datasets/macaquepose/index.html) dataset, images can be downloaded from [download](http://pri.ehub.kyoto-u.ac.jp/datasets/macaquepose/download.php).
 Please download the annotation files from [macaque_annotations](https://download.openmmlab.com/mmpose/datasets/macaque_annotations.tar).
 Extract them under {MMPose}/data, and make them look like this:
